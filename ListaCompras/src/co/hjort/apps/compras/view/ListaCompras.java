@@ -53,12 +53,12 @@ public class ListaCompras extends Activity {
 		spnSecao.setAdapter(adapter);
 		spnSecao.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-			@Override
+//			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				popularItensSecao(pos + 1);
 			}
 
-			@Override
+//			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
@@ -67,14 +67,14 @@ public class ListaCompras extends Activity {
 		btnIncluir = (Button) findViewById(R.id.incluir);
 		btnIncluir.setOnClickListener(new OnClickListener() {
 			
-			@Override
+//			@Override
 			public void onClick(View v) {
 				incluirProduto();
 			}
 		});
 		txtProduto.setOnKeyListener(new OnKeyListener() {
 			
-			@Override
+//			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if ((event.getAction() == KeyEvent.ACTION_DOWN)
 						&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
@@ -126,7 +126,7 @@ public class ListaCompras extends Activity {
 	
 	private class RemoverItemListener implements OnClickListener {
 
-		@Override
+//		@Override
 		public void onClick(View view) {
 			int id = view.getId();
 			if (dao.excluir(id)) {
@@ -140,7 +140,7 @@ public class ListaCompras extends Activity {
 	
 	private class CheckItemListener implements OnCheckedChangeListener {
 
-		@Override
+//		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			dao.marcar(buttonView.getId(), isChecked);
 		}
