@@ -7,6 +7,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -26,6 +28,10 @@ import co.hjort.apps.compras.persistence.ProdutoDAO;
 
 public class ListaCompras extends Activity {
 
+	private static final int MENU_MARCAR_TODOS = 1;
+	private static final int MENU_DESMARCAR_TODOS = 2;
+	private static final int MENU_EXCLUIR_TODOS = 3;
+	
 	private Spinner spnSecao;
 	private EditText txtProduto;
 	private Button btnIncluir;
@@ -172,6 +178,48 @@ public class ListaCompras extends Activity {
 		Toast.makeText(getApplication(), R.string.incluido_produto, Toast.LENGTH_SHORT).show();
 		txtProduto.setText("");
 		txtProduto.requestFocus();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		
+        menu.add(0, MENU_MARCAR_TODOS, 0, R.string.menu_marcar_todos);
+        menu.add(0, MENU_DESMARCAR_TODOS, 0, R.string.menu_desmarcar_todos);
+        menu.add(0, MENU_EXCLUIR_TODOS, 0, R.string.menu_excluir_todos);
+		
+        return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case MENU_MARCAR_TODOS:
+		case MENU_DESMARCAR_TODOS:
+			boolean marcar = (item.getItemId() == MENU_MARCAR_TODOS);
+			if (dao.marcarProdutos(codigoSecao, marcar)) {
+				// FIXME: melhorar esse código de atualização da tela...
+				List<Produto> lista = dao.buscarPorSecao(codigoSecao);
+				for (Produto produto : lista) {
+					int id = (int) produto.getId();
+					View viewItem = itens.findViewById(id);
+					// FIXME: como pegar esse checkbox??!
+					CheckBox chkProduto = (CheckBox) viewItem.findViewById(id);
+					// erro!
+					chkProduto.setChecked(marcar);
+				}
+			}
+			return true;
+		case MENU_EXCLUIR_TODOS:
+			if (dao.excluirProdutos(codigoSecao)) {
+				itens.removeAllViews();
+				Toast.makeText(getApplication(), R.string.produtos_removidos_secao,
+						Toast.LENGTH_SHORT).show();
+				qtdeProdutos = 0;
+			}
+			return true;
+		}
+		return false;
 	}
 
 }

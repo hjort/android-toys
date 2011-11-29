@@ -63,4 +63,14 @@ public class ProdutoDAO {
 		return (db.update(DATABASE_TABLE, values, "_id = " + id, null) > 0);
 	}
 
+	public boolean excluirProdutos(int secao) {
+		return (db.delete(DATABASE_TABLE, "secao = " + secao, null) > 0);
+	}
+
+	public boolean marcarProdutos(int secao, boolean valor) {
+		ContentValues values = new ContentValues();
+		values.put("marcado", valor ? 1 : 0);
+		return (db.update(DATABASE_TABLE, values, "secao = " + secao, null) > 0);
+	}
+
 }

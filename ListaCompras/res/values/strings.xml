@@ -10,6 +10,12 @@
     <string name="produto_removido">Produto removido da lista</string>
     <string name="incluido_produto">Incluído produto na lista</string>
 
+    <string name="produtos_removidos_secao">Todos produtos removidos da seção</string>
+
+    <string name="menu_marcar_todos">Marcar todos</string>
+    <string name="menu_desmarcar_todos">Desmarcar todos</string>
+    <string name="menu_excluir_todos">Excluir todos</string>
+
     <string-array name="secoes">
         <item>Limpeza</item>
         <item>Higiene</item>
