@@ -1,0 +1,15 @@
+* melhorias de usabilidade
+  - alterações em ListaCompras
+    > criar menu "marcar todos"
+    > criar menu "desmarcar todos"
+    > criar menu "excluir todos"
+    
+* seções customizáveis
+  - criar domínio Secao
+  - alterar DatabaseManager (criação da tabela "secoes")
+  - criar classe SecaoDAO
+  - adequações em ListaCompras
+    > na primeira execução do aplicativo, popular tabela com seções vindas de strings.xml
+    > no spinner, incluir opção "Nova..." para criar seção customizada
+    > criar menu "excluir seção"
+    > criar menu "renomear seção"
