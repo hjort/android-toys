@@ -2,9 +2,20 @@ package co.hjort.apps.compras.view;
 
 import java.util.List;
 
+/*
+import com.android.vending.licensing.AESObfuscator;
+import com.android.vending.licensing.LicenseChecker;
+import com.android.vending.licensing.LicenseCheckerCallback;
+import com.android.vending.licensing.ServerManagedPolicy;
+*/
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+/*
+import android.os.Handler;
+import android.provider.Settings.Secure;
+*/
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,6 +34,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import co.hjort.apps.compras.domain.Produto;
 import co.hjort.apps.compras.persistence.ProdutoDAO;
 
@@ -46,6 +58,18 @@ public class ListaCompras extends Activity {
 	
 	private int codigoSecao;
 	private int qtdeProdutos;
+
+	/*
+    private static final String BASE64_PUBLIC_KEY = "...";
+
+	private static final byte[] SALT = new byte[] { -46, 64, 30, -118, -103, -47, 74, -64, 41, 88, -94, -44, 77, -117, -36, -113, -11, 31, -64, 89 };
+
+	private LicenseChecker mChecker;
+	private LicenseCheckerCallback mLicenseCheckerCallback;
+	
+	// a handler on the UI thread
+    private Handler mHandler;
+	*/
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +83,12 @@ public class ListaCompras extends Activity {
 		spnSecao.setAdapter(adapter);
 		spnSecao.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-//			@Override
+			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				popularItensSecao(pos + 1);
 			}
 
-//			@Override
+			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
@@ -73,14 +97,14 @@ public class ListaCompras extends Activity {
 		btnIncluir = (Button) findViewById(R.id.incluir);
 		btnIncluir.setOnClickListener(new OnClickListener() {
 			
-//			@Override
+			@Override
 			public void onClick(View v) {
 				incluirProduto();
 			}
 		});
 		txtProduto.setOnKeyListener(new OnKeyListener() {
 			
-//			@Override
+			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if ((event.getAction() == KeyEvent.ACTION_DOWN)
 						&& (keyCode == KeyEvent.KEYCODE_ENTER)) {
@@ -97,8 +121,32 @@ public class ListaCompras extends Activity {
 		checkItemListener = new CheckItemListener();
 		
 		dao = ProdutoDAO.getInstance(this);
+		
+		/*
+		mHandler = new Handler();
+		
+		final String deviceId = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
+		
+		// library calls this when it's done
+		mLicenseCheckerCallback = new MyLicenseCheckerCallback();
+		
+		// construct the license checker with a policy
+		mChecker = new LicenseChecker(this, new ServerManagedPolicy(this,
+				new AESObfuscator(SALT, getPackageName(), deviceId)), BASE64_PUBLIC_KEY);
+		
+		// check the license
+		doCheckLicense();
+		*/
 	}
 	
+	/*
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		mChecker.onDestroy();
+	}
+	*/
+
 	private void popularItensSecao(int secao) {
 		codigoSecao = secao;
 		qtdeProdutos = 0;
@@ -132,7 +180,7 @@ public class ListaCompras extends Activity {
 	
 	private class RemoverItemListener implements OnClickListener {
 
-//		@Override
+		@Override
 		public void onClick(View view) {
 			int id = view.getId();
 			if (dao.excluir(id)) {
@@ -146,7 +194,7 @@ public class ListaCompras extends Activity {
 	
 	private class CheckItemListener implements OnCheckedChangeListener {
 
-//		@Override
+		@Override
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 			dao.marcar(buttonView.getId(), isChecked);
 		}
@@ -222,4 +270,48 @@ public class ListaCompras extends Activity {
 		return false;
 	}
 
+	/*
+    private void doCheckLicense() {
+		mChecker.checkAccess(mLicenseCheckerCallback);
+        setProgressBarIndeterminateVisibility(true);
+        Toast.makeText(getApplication(), R.string.checking_license, Toast.LENGTH_LONG);
+        mChecker.checkAccess(mLicenseCheckerCallback);
+    }
+
+	private class MyLicenseCheckerCallback implements LicenseCheckerCallback {
+
+		@Override
+		public void allow() {
+			if (isFinishing()) {
+                return;
+            }
+            displayResult(getString(R.string.allow));
+		}
+
+		@Override
+		public void dontAllow() {
+			if (isFinishing()) {
+                return;
+            }
+			displayResult(getString(R.string.dont_allow));
+			showDialog(0);
+		}
+		
+		@Override
+		public void applicationError(ApplicationErrorCode errorCode) {
+			// TODO Auto-generated method stub
+		}
+
+	}
+	
+	private void displayResult(final String result) {
+		mHandler.post(new Runnable() {
+			public void run() {
+		        Toast.makeText(getApplication(), result, Toast.LENGTH_LONG);
+				setProgressBarIndeterminateVisibility(false);
+			}
+		});
+	}
+	*/
+	
 }

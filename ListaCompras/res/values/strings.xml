@@ -23,5 +23,17 @@
         <item>Frutas e Verduras</item>
         <item>Outros</item>
     </string-array>
+    
+    <!-- License checking status messages -->
+    <string name="checking_license">Verificando licença...</string>
+    <string name="dont_allow">Não permite acesso ao usuário</string>
+    <string name="allow">Permite acesso ao usuário</string>
+    <string name="application_error">Erro de Aplicação: %1$s</string>
 
+    <!-- Unlicensed dialog messages -->
+    <string name="unlicensed_dialog_title">Aplicação não licenciada</string>
+    <string name="unlicensed_dialog_body">Esta aplicação não está licenciada. Por favor adquira-a usando o Android Market.</string>
+    <string name="buy_button">Comprar</string>
+    <string name="quit_button">Sair</string>
+    
 </resources>
