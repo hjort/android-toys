@@ -232,8 +232,9 @@ public class ListaCompras extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		
-        menu.add(0, MENU_MARCAR_TODOS, 0, R.string.menu_marcar_todos);
-        menu.add(0, MENU_DESMARCAR_TODOS, 0, R.string.menu_desmarcar_todos);
+		// FIXME: readicionar esses itens do menu
+//        menu.add(0, MENU_MARCAR_TODOS, 0, R.string.menu_marcar_todos);
+//        menu.add(0, MENU_DESMARCAR_TODOS, 0, R.string.menu_desmarcar_todos);
         menu.add(0, MENU_EXCLUIR_TODOS, 0, R.string.menu_excluir_todos);
 		
         return true;
