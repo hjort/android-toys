@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import co.hjort.apps.compras.R;
 import co.hjort.apps.compras.domain.Produto;
 import co.hjort.apps.compras.persistence.ProdutoDAO;
 
